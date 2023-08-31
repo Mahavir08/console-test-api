@@ -155,7 +155,7 @@ app.post("/check", (req, res) => {
       // "isDeleted": false,
 
       deliveryLocation: {
-        recipientType: consumer,
+        recipientType: 'consumer',
         flatNo: req.body.shipping_address.address1,
         address: "",
         sector: "",
