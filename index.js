@@ -207,6 +207,7 @@ app.post("/check", (req, res) => {
       data: req.body,
     });
   } catch (error) {
+    console.log("error: ", error);
     res.status(500).json({
       success: false,
       msg: error.message,
