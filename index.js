@@ -54,8 +54,8 @@ app.post("/check", (req, res) => {
           },
           available: req.body.line_items[0].product_exists,
           attributes: {
-            color: req.body.line_items[0].variant_title.split("/")[1] || null,
-            size: req.body.line_items[0].variant_title.split("/")[0] || null,
+            color: req.body.line_items[0].variant_title && req.body.line_items[0].variant_title.split("/")[1] || null,
+            size: req.body.line_items[0].variant_title && req.body.line_items[0].variant_title.split("/")[0] || null,
             brand: null,
           },
           // "features": [
