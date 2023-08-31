@@ -57,8 +57,8 @@ app.post("/check", (req, res) => {
           },
           available: req.body.line_items[0].product_exists,
           attributes: {
-            color: req.body.line_items[0].variant_title && req.body.line_items[0].variant_title.split("/")[1] || null,
-            size: req.body.line_items[0].variant_title && req.body.line_items[0].variant_title.split("/")[0] || null,
+            color: req.body.line_items[0].variant_title && req.body.line_items[0].variant_title.join("/")[1] || null,
+            size: req.body.line_items[0].variant_title && req.body.line_items[0].variant_title.join("/")[0] || null,
             brand: null,
           },
           // "features": [
@@ -185,15 +185,15 @@ app.post("/check", (req, res) => {
         //   "partnerServiceName": "DP MODE"
         // },
         codInfo: {
-          isCOD: req.body.payment_gateway_names.length > 0 && req.body.payment_gateway_names.split(" ").includes("COD")
+          isCOD: req.body.payment_gateway_names.length > 0 && req.body.payment_gateway_names.join(" ").includes("COD")
             ? true
             : false,
           codAmount: req.body.payment_gateway_names && 
-            req.body.payment_gateway_names.split(" ").includes("COD") === true
+            req.body.payment_gateway_names.join(" ").includes("COD") === true
               ? req.body.current_total_price
               : "",
           invoiceValue: req.body.payment_gateway_names && 
-            req.body.payment_gateway_names.split(" ").includes("COD") === true
+            req.body.payment_gateway_names.joi (" ").includes("COD") === true
               ? req.body.current_total_price
               : "",
         },
