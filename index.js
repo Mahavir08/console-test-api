@@ -7,6 +7,9 @@ app.use(morgan("dev"));
 
 app.post("/check", (req, res) => {
   try {
+
+    console.log("Req.body: ", req.body);
+
     let payload = {
       orderId: req.body.id || null,
       sellerId: "TOKEN",
@@ -182,7 +185,7 @@ app.post("/check", (req, res) => {
         //   "partnerServiceName": "DP MODE"
         // },
         codInfo: {
-          isCOD: req.body.payment_gateway_names && req.body.payment_gateway_names.split(" ").includes("COD")
+          isCOD: req.body.payment_gateway_names.length > 0 && req.body.payment_gateway_names.split(" ").includes("COD")
             ? true
             : false,
           codAmount: req.body.payment_gateway_names && 
