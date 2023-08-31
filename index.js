@@ -182,14 +182,14 @@ app.post("/check", (req, res) => {
         //   "partnerServiceName": "DP MODE"
         // },
         codInfo: {
-          isCOD: req.body.payment_gateway_names.split(" ").includes("COD")
+          isCOD: req.body.payment_gateway_names && req.body.payment_gateway_names.split(" ").includes("COD")
             ? true
             : false,
-          codAmount:
+          codAmount: req.body.payment_gateway_names && 
             req.body.payment_gateway_names.split(" ").includes("COD") === true
               ? req.body.current_total_price
               : "",
-          invoiceValue:
+          invoiceValue: req.body.payment_gateway_names && 
             req.body.payment_gateway_names.split(" ").includes("COD") === true
               ? req.body.current_total_price
               : "",
