@@ -193,7 +193,7 @@ app.post("/check", (req, res) => {
               ? req.body.current_total_price
               : "",
           invoiceValue: req.body.payment_gateway_names && 
-            req.body.payment_gateway_names.joi (" ").includes("COD") === true
+            req.body.payment_gateway_names.join(" ").includes("COD") === true
               ? req.body.current_total_price
               : "",
         },
