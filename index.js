@@ -8,7 +8,7 @@ app.use(morgan("dev"));
 app.post("/check", (req, res) => {
   try {
 
-    console.log("Req.body: ", req.body);
+    // console.log("Req.body: ", req.body);
 
     let payload = {
       orderId: req.body.id || null,
@@ -150,7 +150,35 @@ app.post("/check", (req, res) => {
       },
     };
 
+    let products = req.body.line_items.map((item) => {
+      return ({
+        id: item.id,
+        productId: item.product_id,
+        productName: item.name,
+        title: item.title,
+        price: item.price,
+        currency: item.currency,
+        discountAmount: item.discount_amount,
+        quantity: item.quantity,
+        requireShipping: item.requires_shipping,
+        sku: item.sku,
+        grams: item.grams,
+        priceSet: item.price_set,
+        productExists: item.product_exists,
+        taxable: item.taxable,
+        totalDiscount: item.total_discount,
+        totalDiscountSet: item.total_discount_set,
+        variantId: item.variant_id,
+        variantInventoryManagement:
+          item.variant_inventory_management,
+        variantTitle: item.variant_title,
+        vendor: item.vendor,
+      })
+    });
+
+
     // let payload = {
+
     //   orderId: req.body.id || null,
     //   sellerId: "TOKEN",
     //   // tempOrderId: "EMPTY STRING",
@@ -343,7 +371,7 @@ app.post("/check", (req, res) => {
     //   },
     // };
 
-    console.log("payload: ", payload);
+    console.log("Products: ", products);;
 
     res.status(200).send({
       success: true,
