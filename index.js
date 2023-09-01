@@ -10,6 +10,32 @@ app.post("/check", (req, res) => {
 
     // console.log("Req.body: ", req.body);
 
+    let products = req.body.line_items && req.body.line_items.map((item) => {
+      return ({
+        id: item.id,
+        productId: item.product_id,
+        productName: item.name,
+        title: item.title,
+        price: item.price,
+        currency: item.currency,
+        discountAmount: item.discount_amount,
+        quantity: item.quantity,
+        requireShipping: item.requires_shipping,
+        sku: item.sku,
+        grams: item.grams,
+        priceSet: item.price_set,
+        productExists: item.product_exists,
+        taxable: item.taxable,
+        totalDiscount: item.total_discount,
+        totalDiscountSet: item.total_discount_set,
+        variantId: item.variant_id,
+        variantInventoryManagement:
+          item.variant_inventory_management,
+        variantTitle: item.variant_title,
+        vendor: item.vendor,
+      })
+    });
+
     let payload = {
       orderId: req.body.id || null,
       sellerId: "TOKEN",
@@ -108,29 +134,7 @@ app.post("/check", (req, res) => {
           stateCode: req.body.customer.default_address.province_code,
         },
       },
-      products: {
-        id: req.body.line_items[0].id,
-        productId: req.body.line_items[0].product_id,
-        productName: req.body.line_items[0].name,
-        title: req.body.line_items[0].title,
-        price: req.body.line_items[0].price,
-        currency: req.body.line_items[0].currency,
-        discountAmount: req.body.line_items[0].discount_amount,
-        quantity: req.body.line_items[0].quantity,
-        requireShipping: req.body.line_items[0].requires_shipping,
-        sku: req.body.line_items[0].sku,
-        grams: req.body.line_items[0].grams,
-        priceSet: req.body.line_items[0].price_set,
-        productExists: req.body.line_items[0].product_exists,
-        taxable: req.body.line_items[0].taxable,
-        totalDiscount: req.body.line_items[0].total_discount,
-        totalDiscountSet: req.body.line_items[0].total_discount_set,
-        variantId: req.body.line_items[0].variant_id,
-        variantInventoryManagement:
-          req.body.line_items[0].variant_inventory_management,
-        variantTitle: req.body.line_items[0].variant_title,
-        vendor: req.body.line_items[0].vendor,
-      },
+      products: products,
       shippingAddress: {
         firstName: req.body.shipping_address.first_name,
         lastName: req.body.shipping_address.last_name,
@@ -149,33 +153,6 @@ app.post("/check", (req, res) => {
         stateCode: req.body.shipping_address.province_code,
       },
     };
-
-    let products = req.body.line_items.map((item) => {
-      return ({
-        id: item.id,
-        productId: item.product_id,
-        productName: item.name,
-        title: item.title,
-        price: item.price,
-        currency: item.currency,
-        discountAmount: item.discount_amount,
-        quantity: item.quantity,
-        requireShipping: item.requires_shipping,
-        sku: item.sku,
-        grams: item.grams,
-        priceSet: item.price_set,
-        productExists: item.product_exists,
-        taxable: item.taxable,
-        totalDiscount: item.total_discount,
-        totalDiscountSet: item.total_discount_set,
-        variantId: item.variant_id,
-        variantInventoryManagement:
-          item.variant_inventory_management,
-        variantTitle: item.variant_title,
-        vendor: item.vendor,
-      })
-    });
-
 
     // let payload = {
 
@@ -371,7 +348,7 @@ app.post("/check", (req, res) => {
     //   },
     // };
 
-    console.log("Products: ", products);;
+    console.log("Incoming Body: ", payload);
 
     res.status(200).send({
       success: true,
