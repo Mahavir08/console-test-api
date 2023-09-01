@@ -16,12 +16,12 @@ app.post("/check", (req, res) => {
       companyId: "9b6c92a4-9584-4cf4-a624-58d6bd245a26",
       confirmationNumber: req.body.confirmation_number,
       clientDetails: {
-        acceptLanguage: req.body.client_details.accept_language,
-        browserHeight: req.body.client_details.browser_height,
-        browserIp: req.body.client_details.browser_ip,
-        browserWidth: req.body.client_details.browser_width,
-        sessionHash: req.body.client_details.session_hash,
-        userAgent: req.body.client_details.user_agent,
+        acceptLanguage: req.body.client_details && req.body.client_details.accept_language,
+        browserHeight: req.body.client_details && req.body.client_details.browser_height,
+        browserIp:req.body.client_details && req.body.client_details.browser_ip,
+        browserWidth:req.body.client_details && req.body.client_details.browser_width,
+        sessionHash: req.body.client_details && req.body.client_details.session_hash,
+        userAgent:req.body.client_details &&  req.body.client_details.user_agent,
       },
       browserIp: req.body.browser_ip,
       orderConfirmed: req.body.confirmed,
@@ -31,11 +31,11 @@ app.post("/check", (req, res) => {
 
       taxObject: [
         {
-          price: req.body.tax_lines[0].price,
-          rate: req.body.tax_lines[0].rate,
-          title: req.body.tax_lines[0].title,
-          priceSet: req.body.tax_lines[0].price_set,
-          channelLiable: req.body.tax_lines[0].channel_liable,
+          price: req.body.tax_lines[0] && req.body.tax_lines[0].price,
+          rate: req.body.tax_lines[0] &&  req.body.tax_lines[0].rate,
+          title: req.body.tax_lines[0] &&  req.body.tax_lines[0].title,
+          priceSet:req.body.tax_lines[0] &&  req.body.tax_lines[0].price_set,
+          channelLiable:  req.body.tax_lines[0] && req.body.tax_lines[0].channel_liable,
         },
       ],
 
