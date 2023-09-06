@@ -8,7 +8,7 @@ app.use(morgan("dev"));
 app.post("/check", (req, res) => {
   try {
 
-    // console.log("Req.body: ", req.body);
+    console.log("Req.body: ", req.body);
 
     let products = req.body.line_items && req.body.line_items.map((item) => {
       return ({
