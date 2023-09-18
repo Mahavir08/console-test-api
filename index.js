@@ -363,4 +363,21 @@ app.post("/check", (req, res) => {
   }
 });
 
+app.post("/create", (req,res) => {
+  try {
+    console.log("req.body: ", req.body);
+    res.status(200).send({
+      success: true,
+      data: req.body,
+    });
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(500).json({
+      success: false,
+      msg: error.message,
+    });
+  }
+  
+})
+
 app.listen(8000, () => console.log("Connected To Port 8000"));
