@@ -366,6 +366,7 @@ app.post("/check", (req, res) => {
 app.post("/create", (req,res) => {
   try {
     console.log("req.body: ", req.body);
+    console.log("req.body.links: ", JSON.stringify(req.body.links));
     res.status(200).send({
       success: true,
       data: req.body,
