@@ -365,7 +365,7 @@ app.post("/check", (req, res) => {
 
 app.post("/create", (req,res) => {
   try {
-    console.log("req.body: ", req.body);
+    console.log("req.body: ", JSON.stringify(req.body));
     res.status(200).send({
       success: true,
       data: req.body,
